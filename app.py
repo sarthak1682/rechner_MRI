@@ -128,7 +128,7 @@ def create_data(stellenart, stufe, percent, year, table_month, table_year):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument("-p", "--port", type=int, default=8080)
+    parser.add_argument("-p", "--port", type=int, default=5000)
     parser.add_argument("--http", action="store_true", default=False, help='Whether to enable http protocol for communicates')
     args = parser.parse_args()
     if args.http:
