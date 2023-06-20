@@ -8,6 +8,11 @@ import data.dataset as dt
 from scrapping import scrape_data
 import datetime
 import re
+from flask import Flask #newLine
+from pywebio.platform.flask import webio_view #newLine
+
+app = Flask(__name__) #newLine
+app.secret_key = "123" #newLine
 
 def main():
     set_env(title='Rechner für DRM-Personalkosten')
@@ -125,13 +130,15 @@ def create_data(stellenart, stufe, percent, year, table_month, table_year):
          round(jahreskosten, 2)])
     return data
 
+app.add_url_rule('/', 'webio_view', webio_view(main), methods = ['GET', 'POST'] #newLine
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser()
-    parser.add_argument("-p", "--port", type=int, default=5000)
-    parser.add_argument("--http", action="store_true", default=False, help='Whether to enable http protocol for communicates')
-    args = parser.parse_args()
-    if args.http:
-        start_http_server(main, port=args.port)
-    else:
-        start_ws_server(main, port=args.port, websocket_ping_interval=30)
+    app.run(debug= True) 
+    #oldLineparser = argparse.ArgumentParser() #oldLine
+    #oldLineparser.add_argument("-p", "--port", type=int, default=5000)
+    #oldLineparser.add_argument("--http", action="store_true", default=False, help='Whether to enable http protocol for communicates')
+    #oldLineargs = parser.parse_args()
+    #oldLineif args.http:
+        #oldLinestart_http_server(main, port=args.port)
+    #oldLineelse:
+       #oldLine start_ws_server(main, port=args.port, websocket_ping_interval=30)
