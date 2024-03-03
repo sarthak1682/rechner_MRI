@@ -130,7 +130,7 @@ def create_data(stellenart, stufe, percent, year, table_month, table_year):
          round(jahreskosten, 2)])
     return data
 
-app.add_url_rule('/', 'webio_view', webio_view(main), methods = ['GET', 'POST'] #newLine
+app.add_url_rule('/', 'webio_view', webio_view(main), methods = ['GET', 'POST']) #newLine
 
 if __name__ == '__main__':
     app.run(debug= True) 
